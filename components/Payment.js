@@ -1,14 +1,14 @@
 import  { useRef, useState } from 'react'
-import {styles} from './Payment.module.scss'
+import styles from './Payment.module.scss'
 
 const Payment = () => {
     let paymentAmountref = useRef(null)
     const [token, setToken] = useState(null)
-
+    console.log(styles)
     return (
         <div>
             <input type={'number'} ref={el => {paymentAmountref = el}} />
-            <p>Tap the card you are trying to pay</p>
+            <p className={styles.token}>Tap the card you are trying to pay</p>
         </div>
     )
 }
