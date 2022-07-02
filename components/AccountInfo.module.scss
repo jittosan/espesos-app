@@ -1,0 +1,23 @@
+@import './../styles/main';
+
+.container {
+    width: 80%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 2ch;
+    font-family: 'Rubik', sans-serif;
+    text-align: left;
+
+    .accountName {
+        margin: auto auto auto 0;
+    }
+
+    .token {
+        opacity: 0.8;
+        color: grey;
+    }
+
+    .accountBalance {
+        font-size: 3rem;
+    }
+}
