@@ -42,7 +42,7 @@ export default function Home() {
             {/* <AccountInfo accountInfo={testAccount}/> */}
             {/* {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount}/> : <ScanCard toggle={connectToken} />} */}
             {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
-            {openPayment ? <Payment closePayment={closePaymentMenu} /> : ''}
+            {openPayment ? <Payment close={closePaymentMenu} /> : ''}
         </main>
 
         <footer className={styles.footer}>
