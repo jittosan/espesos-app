@@ -18,6 +18,11 @@ export default function Home() {
     const [token, setToken] = useState(null)
     const tokenLoggedIn = () => {return token !== null}
     const connectToken = () => {console.log('click');if (tokenLoggedIn()) {setToken(null)} else {setToken('token')}}
+    // state to open payment menu
+    const [openPayment, setOpenPayment] = useState(false)
+    const openPaymentMenu = () => {setOpenPayment(true)}
+    const closePaymentMenu = () => {setOpenPayment(false)}
+
 
     useEffect(() => {
         console.log(token)
@@ -33,10 +38,11 @@ export default function Home() {
         </Head>
 
         <main className={styles.main}>
-            <Header onClick={connectToken} />
+            <Header />
             {/* <AccountInfo accountInfo={testAccount}/> */}
             {/* {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount}/> : <ScanCard toggle={connectToken} />} */}
-            {tokenLoggedIn() ? <Payment /> : <ScanCard toggle={connectToken} />}
+            {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
+            {openPayment ? <Payment /> : ''}
         </main>
 
         <footer className={styles.footer}>
