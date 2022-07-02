@@ -1,9 +1,9 @@
 const readUserToken = async () => {
-    return '73fb-gd68-sfn9-s7d4'
+    return '8fng-d7r3-mxo3-v4u3'
 }
 
 const readPaymentToken = async () => {
-    return '8fng-d7r3-mxo3-v4u3'
+    return '73fb-gd68-sfn9-s7d4'
 }
 
 const fetchAccountData = async (token) => {
