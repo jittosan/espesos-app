@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './AccountInfo.module.scss'
 
-const AccountInfo = ({ accountInfo }) => {
+const AccountInfo = ({ accountInfo, openPayment }) => {
   return (
     <div className={styles.container}>
         <div>
@@ -9,7 +9,7 @@ const AccountInfo = ({ accountInfo }) => {
             <span className={styles.token}>{accountInfo.token}</span>
             <h1 className={styles.accountBalance}>$ {accountInfo.balance}</h1>
         </div>
-        <button className={styles.paymentButton}>Make Payment</button>
+        <button className={styles.paymentButton} onClick={() => openPayment()}>Make Payment</button>
     </div>
   )
 }
