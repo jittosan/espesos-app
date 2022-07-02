@@ -1,4 +1,5 @@
-import React, { useRef } from 'react'
+import  { useRef, useState } from 'react'
+import {styles} from './Payment.module.scss'
 
 const Payment = () => {
     let paymentAmountref = useRef(null)

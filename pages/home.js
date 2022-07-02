@@ -4,6 +4,7 @@ import AccountInfo from '../components/AccountInfo'
 import ScanCard from '../components/ScanCard'
 import Header from '../components/Header'
 import styles from './../styles/Home.module.scss'
+import Payment from '../components/Payment'
 
 let testAccount = {
     'name':'Ratnajit Sarkar',
@@ -34,7 +35,8 @@ export default function Home() {
         <main className={styles.main}>
             <Header onClick={connectToken} />
             {/* <AccountInfo accountInfo={testAccount}/> */}
-            {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount}/> : <ScanCard toggle={connectToken} />}
+            {/* {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount}/> : <ScanCard toggle={connectToken} />} */}
+            {tokenLoggedIn() ? <Payment /> : <ScanCard toggle={connectToken} />}
         </main>
 
         <footer className={styles.footer}>
