@@ -3,13 +3,6 @@ import styles from './Payment.module.scss'
 import {MdOutlineConnectedTv} from 'react-icons/md'
 import { fetchAccountData, readPaymentToken } from '../scripts/reader'
 
-let demoPayment = {
-    'token': '8fng-d7r3-mxo3-v4u3',
-    'name' : 'Davin Chua'
-}
-
-let paymentToken = '8fng-d7r3-mxo3-v4u3'
-
 const Payment = ({ close }) => {
     let paymentAmountref = useRef(null)
     // state to hold recipient token information

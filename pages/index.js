@@ -7,13 +7,6 @@ import styles from './../styles/Home.module.scss'
 import Payment from '../components/Payment'
 import { fetchAccountData, readPaymentToken, readUserToken } from '../scripts/reader'
 
-let testAccount = {
-    'name':'Ratnajit Sarkar',
-    'token':'73fb-gd68-sfn9-s7d4',
-    'balance': '187.90'
-}
-let defaultToken = "A";
-
 export default function Home() {
     // state to store currently logged in token
     const [userData, setUserData] = useState(null)
