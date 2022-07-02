@@ -5,29 +5,34 @@ import ScanCard from '../components/ScanCard'
 import Header from '../components/Header'
 import styles from './../styles/Home.module.scss'
 import Payment from '../components/Payment'
+import { fetchAccountData, readPaymentToken, readUserToken } from '../scripts/reader'
 
 let testAccount = {
     'name':'Ratnajit Sarkar',
     'token':'73fb-gd68-sfn9-s7d4',
     'balance': '187.90'
 }
-
+let defaultToken = "A";
 
 export default function Home() {
     // state to store currently logged in token
-    const [token, setToken] = useState(null)
-    const tokenLoggedIn = () => {return token !== null}
-    const connectToken = () => {console.log('click');if (tokenLoggedIn()) {setToken(null)} else {setToken('token')}}
+    const [userData, setUserData] = useState(null)
+    const tokenLoggedIn = () => {return userData !== null}
+    const connectToken = () => {console.log('click');if (tokenLoggedIn()) {setUserData(null)} else {setUserData('token')}}
     // state to open payment menu
     const [openPayment, setOpenPayment] = useState(false)
     const openPaymentMenu = () => {setOpenPayment(true)}
     const closePaymentMenu = () => {setOpenPayment(false)}
 
-
+    // scan for NFC cards on load
     useEffect(() => {
-        console.log(token)
-    }, [token])
-    
+        const loadUser = async () => {
+            const token = await readUserToken()
+            const response = await fetchAccountData(token)
+            setUserData(response)
+        }
+        loadUser()
+    }, [])
 
     return (
         <div>
@@ -39,9 +44,7 @@ export default function Home() {
 
         <main className={styles.main}>
             <Header />
-            {/* <AccountInfo accountInfo={testAccount}/> */}
-            {/* {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount}/> : <ScanCard toggle={connectToken} />} */}
-            {tokenLoggedIn() ? <AccountInfo accountInfo={testAccount} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
+            {tokenLoggedIn() ? <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
             {openPayment ? <Payment close={closePaymentMenu} /> : ''}
         </main>
 
