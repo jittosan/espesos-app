@@ -1,22 +1,5 @@
 // takes in token and obtains Account data from server
-// let db = {
-//     '73fb-gd68-sfn9-s7d4': {
-//         'name':'Ratnajit Sarkar',
-//         'token':'73fb-gd68-sfn9-s7d4',
-//         'balance': '28.90'
-//     },
-//     '8fng-d7r3-mxo3-v4u3': {
-//         'name':'Davin Chua',
-//         'token':'8fng-d7r3-mxo3-v4u3',
-//         'balance': '32.00'
-//     },
-//     'rh83-4h89-fnuu-49gf': {
-//         'name':'Rammdarshan s/o Ramesh',
-//         'token':'rh83-4h89-fnuu-49gf',
-//         'balance': '6.10'
-//     }
-// }
-const SERVER_ADDRESS = "http://127.0.0.1:8000"
+const SERVER_ADDRESS = process.env.SERER_ADDRESS
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {

@@ -1,4 +1,4 @@
-const SERVER_ADDRESS = "http://127.0.0.1:8000"
+const SERVER_ADDRESS = process.env.SERER_ADDRESS
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {

@@ -7,6 +7,8 @@ import styles from './../styles/Home.module.scss'
 import Payment from '../components/Payment'
 import { fetchAccountData, isNFCenabled } from '../scripts/reader'
 
+// IMPLEMENT LOADER FOR WHEN SERVER IS UNRESPONSIVE
+
 export default function Home() {
     // state to store scanned token
     const [userToken, setUserToken] = useState('')
