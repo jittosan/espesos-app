@@ -19,4 +19,21 @@ const fetchAccountData = async (token) => {
     return data
 }
 
-export {readUserToken, readPaymentToken, fetchAccountData}
+const submitTransaction = async (senderToken, recipientToken, amount) => {
+    const response = await fetch('/api/transaction', {
+        method:'POST',
+        body: JSON.stringify({'senderToken': senderToken, 'recipientToken' : recipientToken, 'amount': amount}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const data = await response.json()
+    return data
+}
+
+export {
+    readUserToken, 
+    readPaymentToken, 
+    fetchAccountData, 
+    submitTransaction
+}

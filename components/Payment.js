@@ -1,6 +1,6 @@
 import  { useEffect, useRef, useState } from 'react'
 import styles from './Payment.module.scss'
-import { fetchAccountData } from '../scripts/reader'
+import { fetchAccountData, submitTransaction } from '../scripts/reader'
 import ScanCard from './ScanCard'
 import { MdErrorOutline } from 'react-icons/md'
 
@@ -48,8 +48,7 @@ const Payment = ({ close, senderInfo }) => {
 
 
     // validate inputs
-    const validatePaymentInputs = () => {
-        const paymentAmount = parsePaymentAmount(paymentAmountRef)
+    const validatePaymentInputs = (paymentAmount) => {
         //to get to this page, userToken must already be loaded in; so assume userToken loaded
         // check recipient token logged
         if (!recipientTokenLogged()) {
@@ -89,8 +88,10 @@ const Payment = ({ close, senderInfo }) => {
 
     //process payment
     const processPayment = () => {
-        if (validatePaymentInputs()) {
+        const paymentAmount = parsePaymentAmount(paymentAmountRef)
+        if (validatePaymentInputs(paymentAmount)) {
             console.log('Process Payment.')
+            submitTransaction(senderInfo.token, recipientData.token, paymentAmount)
             close()
         } else {
             console.log('Payment Rejected.')
