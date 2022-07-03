@@ -1,10 +1,10 @@
 
 const readUserToken = async () => {
-    return 'rh83-4h89-fnuu-49gf'
+    return '8fng-d7r3-mxo3-v4u3'
 }
 
 const readPaymentToken = async () => {
-    return '8fng-d7r3-mxo3-v4u3'
+    return 'rh83-4h89-fnuu-49gf'
 }
 
 // NFC FUNCTIONS
