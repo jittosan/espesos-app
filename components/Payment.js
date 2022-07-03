@@ -11,7 +11,7 @@ const Payment = ({ close }) => {
     const loadRecipientData = (token) => {processPayment(token)}
     
     //process payment
-    const processPayment = async (token=undefined) => {
+    const processPayment = async (token) => {
         const response = await fetchAccountData(token)
         setRecipientData(response)
     }
