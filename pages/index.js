@@ -5,27 +5,53 @@ import ScanCard from '../components/ScanCard'
 import Header from '../components/Header'
 import styles from './../styles/Home.module.scss'
 import Payment from '../components/Payment'
-import { fetchAccountData, readPaymentToken, readUserToken } from '../scripts/reader'
+import { fetchAccountData, readUserToken } from '../scripts/reader'
 
 export default function Home() {
-    // state to store currently logged in token
-    const [userData, setUserData] = useState(null)
-    const tokenLoggedIn = () => {return userData !== null}
-    const connectToken = () => {console.log('click');if (tokenLoggedIn()) {setUserData(null)} else {setUserData('token')}}
+    // state to store scanned token
+    const [userToken, setUserToken] = useState('')
+    const userLoggedIn = () => {return userToken !== ''}
+    const loginUser = (token) => {setUserToken(token)}
+    // state to store user data from scanned token
+    const [userData, setUserData] = useState({})
+    const userDataLoaded = () => {return userData !== {}}
+    const loadUserData = (data) => {setUserData(data)}
+    const connectToken = () => {console.log('click');if (userDataLoaded()) {setUserData(null)} else {setUserData('token')}}
     // state to open payment menu
     const [openPayment, setOpenPayment] = useState(false)
     const openPaymentMenu = () => {setOpenPayment(true)}
     const closePaymentMenu = () => {setOpenPayment(false)}
 
-    // scan for NFC cards on load
+    // load in token from "NFC"
     useEffect(() => {
-        const loadUser = async () => {
+        const loadUserToken = async () => {
             const token = await readUserToken()
-            const response = await fetchAccountData(token)
-            setUserData(response)
+            loginUser(token)
         }
-        loadUser()
+        if (!userLoggedIn()) {loadUserToken()}
     }, [])
+
+    // load in data whenever token updates
+    useEffect(() => {
+        const getTokenData = async () => {
+            console.log('LOADING TOKEN', userToken)
+            const response = await fetchAccountData(userToken)
+            loadUserData(response)
+        }
+        if (userLoggedIn()) {getTokenData()}
+    }, [userToken])
+
+
+    // scan for NFC cards on load
+    // useEffect(() => {
+    //     const loadUser = async () => {
+    //         const token = await readUserToken()
+    //         const response = await fetchAccountData(token)
+    //         console.log('DATA', response)
+    //         setUserData(response)
+    //     }
+    //     loadUser()
+    // }, [])
 
     return (
         <div>
@@ -37,7 +63,7 @@ export default function Home() {
 
         <main className={styles.main}>
             <Header />
-            {tokenLoggedIn() ? <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
+            {userLoggedIn() ? <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
             {openPayment ? <Payment close={closePaymentMenu} /> : ''}
         </main>
 
