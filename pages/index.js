@@ -5,7 +5,7 @@ import ScanCard from '../components/ScanCard'
 import Header from '../components/Header'
 import styles from './../styles/Home.module.scss'
 import Payment from '../components/Payment'
-import { fetchAccountData, readUserToken } from '../scripts/reader'
+import { fetchAccountData } from '../scripts/reader'
 
 export default function Home() {
     // state to store scanned token
@@ -22,15 +22,6 @@ export default function Home() {
     const openPaymentMenu = () => {setOpenPayment(true)}
     const closePaymentMenu = () => {setOpenPayment(false)}
 
-    // load in token from "NFC"
-    useEffect(() => {
-        const loadUserToken = async () => {
-            const token = await readUserToken()
-            loginUser(token)
-        }
-        if (!userLoggedIn()) {loadUserToken()}
-    }, [])
-
     // load in user data whenever token updates
     useEffect(() => {
         const getTokenData = async () => {
@@ -40,18 +31,6 @@ export default function Home() {
         }
         if (userLoggedIn()) {getTokenData()}
     }, [userToken])
-
-
-    // scan for NFC cards on load
-    // useEffect(() => {
-    //     const loadUser = async () => {
-    //         const token = await readUserToken()
-    //         const response = await fetchAccountData(token)
-    //         console.log('DATA', response)
-    //         setUserData(response)
-    //     }
-    //     loadUser()
-    // }, [])
 
     return (
         <div>
@@ -67,8 +46,8 @@ export default function Home() {
                 <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> 
                 : 
                 <ScanCard 
-                    loadToken={loginUser} 
-                    toggle={connectToken}
+                    loadToken={loginUser}
+                    onScan={loginUser}
                     displayTextSwitch={'user'}
                 />}
             {openPayment ? <Payment close={closePaymentMenu} senderInfo={userData} /> : ''}

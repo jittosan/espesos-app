@@ -1,6 +1,6 @@
 import  { useRef, useState } from 'react'
 import styles from './Payment.module.scss'
-import { fetchAccountData, readPaymentToken } from '../scripts/reader'
+import { fetchAccountData } from '../scripts/reader'
 import ScanCard from './ScanCard'
 
 const Payment = ({ close }) => {
@@ -8,11 +8,10 @@ const Payment = ({ close }) => {
     // state to hold recipient token information
     const [recipientData, setRecipientData] = useState(null)
     const tokenLoggedIn = () => {return recipientData !== null}
-    const connectToken = () => {console.log('click');if (tokenLoggedIn()) {setRecipientData(null)} else {processPayment()}}
+    const loadRecipientData = (token) => {processPayment(token)}
     
     //process payment
-    const processPayment = async () => {
-        const token = await readPaymentToken()
+    const processPayment = async (token=undefined) => {
         const response = await fetchAccountData(token)
         setRecipientData(response)
     }
@@ -28,7 +27,10 @@ const Payment = ({ close }) => {
                     </> 
                     : 
                     <>
-                        <ScanCard toggle={() => {connectToken()}} displayTextSwitch={'recipient'} />
+                        <ScanCard 
+                            displayTextSwitch={'recipient'} 
+                            onScan={loadRecipientData}
+                        />
                     </>
                 }
             </div>

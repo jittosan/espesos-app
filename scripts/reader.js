@@ -1,10 +1,10 @@
 
 const readUserToken = async () => {
-    return '73fb-gd68-sfn9-s7d4'
+    return '8fng-d7r3-mxo3-v4u3'
 }
 
 const readPaymentToken = async () => {
-    return 'rh83-4h89-fnuu-49gf'
+    return '73fb-gd68-sfn9-s7d4'
 }
 
 const fetchAccountData = async (token) => {
