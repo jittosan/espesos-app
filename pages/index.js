@@ -12,7 +12,7 @@ export default function Home() {
     const [userToken, setUserToken] = useState('')
     const userLoggedIn = () => {return userToken !== ''}
     const loginUser = (token) => {setUserToken(token)}
-    // state to store user data from scanned token
+    // state to store user data from scanned token (store token separately to enable data refresh while retaining login/token, after paymetn processed)
     const [userData, setUserData] = useState({})
     const userDataLoaded = () => {return userData !== {}}
     const loadUserData = (data) => {setUserData(data)}
@@ -31,7 +31,7 @@ export default function Home() {
         if (!userLoggedIn()) {loadUserToken()}
     }, [])
 
-    // load in data whenever token updates
+    // load in user data whenever token updates
     useEffect(() => {
         const getTokenData = async () => {
             console.log('LOADING TOKEN', userToken)
@@ -63,13 +63,16 @@ export default function Home() {
 
         <main className={styles.main}>
             <Header />
-            {userLoggedIn() ? <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> : <ScanCard toggle={connectToken} />}
-            {openPayment ? <Payment close={closePaymentMenu} /> : ''}
+            {userLoggedIn() ? 
+                <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> 
+                : 
+                <ScanCard 
+                    loadToken={loginUser} 
+                    toggle={connectToken}
+                    displayTextSwitch={'user'}
+                />}
+            {openPayment ? <Payment close={closePaymentMenu} senderInfo={userData} /> : ''}
         </main>
-
-        <footer className={styles.footer}>
-            
-        </footer>
         </div>
     )
 }

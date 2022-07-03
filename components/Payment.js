@@ -2,6 +2,7 @@ import  { useRef, useState } from 'react'
 import styles from './Payment.module.scss'
 import {MdOutlineConnectedTv} from 'react-icons/md'
 import { fetchAccountData, readPaymentToken } from '../scripts/reader'
+import ScanCard from './ScanCard'
 
 const Payment = ({ close }) => {
     let paymentAmountref = useRef(null)
@@ -28,8 +29,7 @@ const Payment = ({ close }) => {
                     </> 
                     : 
                     <>
-                        <MdOutlineConnectedTv />
-                        <p className={styles.token} onClick={() => {connectToken()}}>Scan the card you are trying to pay</p> 
+                        <ScanCard toggle={() => {connectToken()}} displayTextSwitch={'recipient'} />
                     </>
                 }
             </div>
