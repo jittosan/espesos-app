@@ -79,4 +79,29 @@
         font-family: 'Rubik', sans-serif;
         margin: auto;
     }
+
+    .paymentError {
+        position: absolute;
+        bottom: 5ch;
+        width: 80%;
+        margin: 0 2rem;
+        padding: 1ch 4ch;
+        height: auto;
+        color: black;
+        background-color: rgb(254, 214, 214);
+        border-radius: 3ch;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+            font-size: 2rem;
+            margin: auto;
+        }
+
+        p {
+            margin-left: 1ch;
+        }
+    }
 }

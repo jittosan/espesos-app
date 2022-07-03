@@ -2,6 +2,7 @@ import  { useEffect, useRef, useState } from 'react'
 import styles from './Payment.module.scss'
 import { fetchAccountData } from '../scripts/reader'
 import ScanCard from './ScanCard'
+import { MdErrorOutline } from 'react-icons/md'
 
 // utilty functions
 const parsePaymentAmount = (ref) => {
@@ -41,7 +42,7 @@ const Payment = ({ close, senderInfo }) => {
         if (paymentError()) {
             setTimeout(()=>{
                 clearError()
-            }, 5000)
+            }, 3000)
         }
     }, [errorCode])
 
@@ -130,9 +131,10 @@ const Payment = ({ close, senderInfo }) => {
 export default Payment
 
 const PaymentErrorMessage = ({ errorCode }) => {
-  return (
-    <div>
-        <p style={{color:'red'}}>{errorMessages[errorCode]}</p>
-    </div>
-  )
+    return (
+        <div className={styles.paymentError}>
+            <MdErrorOutline />
+            <p>{errorMessages[errorCode]}</p>
+        </div>
+    )
 }
