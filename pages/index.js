@@ -29,7 +29,7 @@ export default function Home() {
             loadUserData(response)
         }
         if (userLoggedIn()) {getTokenData()}
-    }, [userToken])
+    }, [userToken, openPayment])
 
     return (
         <div>
