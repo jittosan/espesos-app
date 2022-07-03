@@ -5,7 +5,7 @@ import ScanCard from '../components/ScanCard'
 import Header from '../components/Header'
 import styles from './../styles/Home.module.scss'
 import Payment from '../components/Payment'
-import { fetchAccountData } from '../scripts/reader'
+import { fetchAccountData, isNFCenabled } from '../scripts/reader'
 
 export default function Home() {
     // state to store scanned token
@@ -20,6 +20,15 @@ export default function Home() {
     const [openPayment, setOpenPayment] = useState(false)
     const openPaymentMenu = () => {setOpenPayment(true)}
     const closePaymentMenu = () => {setOpenPayment(false)}
+
+    //check NFC compatibility on initial load
+    useEffect(() => {
+        if (isNFCenabled()) {
+            console.log("NFC enabled")
+        } else{
+            console.log("NFC disabled on this device.")
+        }
+    }, [])
 
     // load in user data whenever token updates
     useEffect(() => {

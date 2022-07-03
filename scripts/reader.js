@@ -7,6 +7,34 @@ const readPaymentToken = async () => {
     return 'rh83-4h89-fnuu-49gf'
 }
 
+// NFC FUNCTIONS
+const isNFCenabled = () => {
+    return ('NDEFReader' in window)
+}
+
+const startNFCscan = () => {
+    // check browser is NFC compatible
+    if (!isNFCenabled()){return null}
+    const ndef = new NDEFReader();
+    ndef.scan().then(() => {
+        console.log('NFC scan started')
+        // NFC error handling
+        ndef.onreadingerror = () => {
+            console.log('FAILED: Unable to read data from NFC tag.')
+        }
+        // NFC reading event
+        ndef.onreading = (event) => {
+            console.log('Reading NFC tag...')
+            // return token
+        }
+    }).catch((error) => {
+        console.log(`FAILED: Scan failed to start: ${error}`)
+    })
+}
+
+
+// NEXT API FUNCTIONS
+
 const fetchAccountData = async (token) => {
     const response = await fetch('/api/account', {
         method:'POST',
@@ -35,5 +63,7 @@ export {
     readUserToken, 
     readPaymentToken, 
     fetchAccountData, 
-    submitTransaction
+    submitTransaction,
+    isNFCenabled,
+    startNFCscan
 }
