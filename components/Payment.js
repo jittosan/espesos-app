@@ -1,6 +1,5 @@
 import  { useRef, useState } from 'react'
 import styles from './Payment.module.scss'
-import {MdOutlineConnectedTv} from 'react-icons/md'
 import { fetchAccountData, readPaymentToken } from '../scripts/reader'
 import ScanCard from './ScanCard'
 
