@@ -16,6 +16,7 @@
 //         'balance': '6.10'
 //     }
 // }
+const SERVER_ADDRESS = "http://127.0.0.1:8000"
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
             res.status(400)
         } else {
             //
-            const response = await fetch('http://127.0.0.1:8000/account/', {
+            const response = await fetch(SERVER_ADDRESS + '/account/', {
                 method:'POST',
                 body: JSON.stringify({'token': req.body.token}),
                 headers: {
