@@ -46,7 +46,6 @@ export default function Home() {
                 <AccountInfo accountInfo={userData} openPayment={openPaymentMenu}/> 
                 : 
                 <ScanCard 
-                    loadToken={loginUser}
                     onScan={loginUser}
                     displayTextSwitch={'user'}
                 />}

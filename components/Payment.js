@@ -7,7 +7,7 @@ const Payment = ({ close }) => {
     let paymentAmountref = useRef(null)
     // state to hold recipient token information
     const [recipientData, setRecipientData] = useState(null)
-    const tokenLoggedIn = () => {return recipientData !== null}
+    const recipientTokenLogged = () => {return recipientData !== null}
     const loadRecipientData = (token) => {processPayment(token)}
     
     //process payment
@@ -20,7 +20,7 @@ const Payment = ({ close }) => {
         <div className={styles.container}>
             <strong>Pay:</strong>
             <div className={styles.paymentConfirmation}>
-                {tokenLoggedIn() ?  
+                {recipientTokenLogged() ?  
                     <>
                         <h1 className={styles.paymentAccountName}>{recipientData.name}</h1>
                         <span className={styles.paymentAccountToken}>{recipientData.token}</span>

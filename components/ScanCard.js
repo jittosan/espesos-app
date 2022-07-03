@@ -17,6 +17,7 @@ const ScanCard = ({ toggle, displayTextSwitch, onScan }) => {
             // scan for NFC but for testing just read in tokens
             if (displayTextSwitch === 'user') {token = await readUserToken()}
             else if (displayTextSwitch === 'recipient') {token = await readPaymentToken()}
+            console.log('TOKEN', token)
             onScan(token)
         }
         scanForCard()
