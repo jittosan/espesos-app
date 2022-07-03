@@ -16,7 +16,6 @@ export default function Home() {
     const [userData, setUserData] = useState({})
     const userDataLoaded = () => {return userData !== {}}
     const loadUserData = (data) => {setUserData(data)}
-    const connectToken = () => {console.log('click');if (userDataLoaded()) {setUserData(null)} else {setUserData('token')}}
     // state to open payment menu
     const [openPayment, setOpenPayment] = useState(false)
     const openPaymentMenu = () => {setOpenPayment(true)}
